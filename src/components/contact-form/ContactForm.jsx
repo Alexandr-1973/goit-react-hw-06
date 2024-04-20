@@ -3,10 +3,24 @@ import { Field, Formik, Form } from "formik";
 import { ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
+import { nanoid } from "nanoid";
+import { useDispatch, useSelector } from "react-redux";
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
   const nameId = useId();
   const phoneId = useId();
+
+  // function addContact(values) {
+  //   const id = nanoid();
+    
+  //   const action = {
+  //     type: "contactListArray/addContact",
+  //     payload: { ...values, id },
+  //   };
+
+  //   dispatch(action);
+  // }
 
   const ContactFormSchema = Yup.object().shape({
     name: Yup.string()
@@ -29,7 +43,18 @@ const ContactForm = ({ addContact }) => {
   };
 
   const handleSubmit = (values, actions) => {
-    addContact(values);
+    const id = nanoid();
+    
+    const action = {
+      type: "contactListArray/addContact",
+      payload: { ...values, id },
+    };
+
+    dispatch(action);
+
+    // addContact(values);
+
+
     actions.resetForm();
   };
 
