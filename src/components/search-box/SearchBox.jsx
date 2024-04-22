@@ -13,6 +13,7 @@ const SearchBox = () => {
     <div className={css["search-div"]}>
       <label htmlFor={searchId}>Find contacts by name</label>
       <input
+        autoComplete="off"
         id={searchId}
         className={css.search}
         type="text"

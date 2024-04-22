@@ -47,13 +47,13 @@ const ContactForm = () => {
       <Form className={css.form}>
         <div className={css["form-divs"]}>
           <label htmlFor={nameId}>Name</label>
-          <Field type="text" name="name" id={nameId} />
+          <Field type="text" name="name" id={nameId} autoComplete="off" />
           <ErrorMessage className={css.error} name="name" component="p" />
         </div>
 
         <div className={css["form-divs"]}>
           <label htmlFor={phoneId}>Number</label>
-          <Field type="text" name="number" id={phoneId} />
+          <Field type="text" name="number" id={phoneId} autoComplete="off" />
           <ErrorMessage className={css.error} name="number" component="p" />
         </div>
 
