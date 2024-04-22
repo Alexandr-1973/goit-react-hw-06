@@ -4,23 +4,13 @@ import { ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
 import { nanoid } from "nanoid";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
   const nameId = useId();
   const phoneId = useId();
-
-  // function addContact(values) {
-  //   const id = nanoid();
-    
-  //   const action = {
-  //     type: "contactListArray/addContact",
-  //     payload: { ...values, id },
-  //   };
-
-  //   dispatch(action);
-  // }
 
   const ContactFormSchema = Yup.object().shape({
     name: Yup.string()
@@ -44,17 +34,7 @@ const ContactForm = () => {
 
   const handleSubmit = (values, actions) => {
     const id = nanoid();
-    
-    const action = {
-      type: "contactListArray/addContact",
-      payload: { ...values, id },
-    };
-
-    dispatch(action);
-
-    // addContact(values);
-
-
+    dispatch(addContact({ ...values, id }));
     actions.resetForm();
   };
 

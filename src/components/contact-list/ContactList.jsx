@@ -1,45 +1,24 @@
-import {useSelector} from "react-redux";
-
+import { useSelector } from "react-redux";
+import { selectContacts } from "../../redux/contactsSlice";
+import { selectNameFilter } from "../../redux/filtersSlice";
 
 import Contact from "../contact/Contact";
 import css from "./ContactList.module.css";
 
 const ContactList = () => {
-  // const dispatch=useDispatch();
-  const contactListArray = useSelector((state) => state.contactListArray);
-  const searchText = useSelector((state) => state.searchText);
+  const contacts = useSelector(selectContacts);
+  const nameFilter = useSelector(selectNameFilter);
 
-  // function deleteContact(id) {
-  //   // setContactListArray(
-  //   //   contactListArray.filter((contact) => contact.id !== id)
-  //   // );
-  //   const action = {
-  //     type: "contactListArray/deleteContact",
-  //     payload: contactListArray.filter((contact) => contact.id !== id),
-  //   }
-  //   dispatch(action);
-  // }
-
-//   console.log(contactListArray);
-//   console.log(searchText);
-//   const visibleContactList =  const { id, name, number } = contactInfo;;
-  
-//   });
-
-
-const visibleContactList = contactListArray.filter((contact) =>
-contact.name.toLowerCase().trim().includes(searchText.toLowerCase().trim())
-);
+  const visibleContactList = contacts.filter((contact) =>
+    contact.name.toLowerCase().trim().includes(nameFilter.toLowerCase().trim())
+  );
 
   return (
     <ul className={css["contact-list"]}>
       {visibleContactList.map((contactInfo) => {
         return (
           <li key={contactInfo.id}>
-            <Contact
-              contactInfo={contactInfo}
-              // onDeleteContact={deleteContact}
-            />
+            <Contact contactInfo={contactInfo} />
           </li>
         );
       })}

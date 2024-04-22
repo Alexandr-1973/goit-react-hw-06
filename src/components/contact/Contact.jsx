@@ -1,25 +1,12 @@
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoPerson } from "react-icons/io5";
-import {useSelector, useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
 import css from "./Contact.module.css";
 
 const Contact = ({ contactInfo }) => {
   const { id, name, number } = contactInfo;
-  const dispatch=useDispatch();
-  const contactListArray = useSelector((state) => state.contactListArray);
- 
-
-  function deleteContact(id) {
-    console.log(contactListArray);
-    const action = {
-      type: "contactListArray/deleteContact",
-      payload: id,
-    }
-    dispatch(action);
-    console.log(contactListArray);
-  }
-
-  
+  const dispatch = useDispatch();
 
   return (
     <div className={css.contact}>
@@ -37,7 +24,7 @@ const Contact = ({ contactInfo }) => {
           </p>
         </li>
       </ul>
-      <button className={css.btn} onClick={() => deleteContact(id)}>
+      <button className={css.btn} onClick={() => dispatch(deleteContact(id))}>
         Delete
       </button>
     </div>
